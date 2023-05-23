@@ -35,9 +35,19 @@ let acertoComputador = 45; // 45 é o centro da raquete
 let erro = false;
 let pontuei = false;
 
+//configuração canvas
+let canvas;
+
 function setup() {
   createCanvas(600, 400);
-  trilha.loop();
+  const canvasContainer = document.getElementById('canvas-container');
+  if (canvasContainer !== null) {
+    canvas = createCanvas(600, 400);
+    canvas.parent(canvasContainer);
+  } else {
+    console.error("Element with id 'canvas-container' not found.");
+  }
+  noLoop();
 }
 
 function draw() {
@@ -54,6 +64,20 @@ function draw() {
   incluiPlacar();
   marcaPonto();
 }
+
+function carregarAplicacao() {
+  const canvasContainer = document.getElementById('canvas-container');
+  canvasContainer.style.display = 'block'; // Exibe o contêiner ao clicar no botão
+  trilha.loop();
+  
+
+  new p5(sketch, 'canvas-container');
+}
+
+const sketch = (p) => {
+  p.setup = setup;
+  p.draw = draw;
+};
 
 function mostraBolinha () { 
   circle(xBolinha, yBolinha, diametro);

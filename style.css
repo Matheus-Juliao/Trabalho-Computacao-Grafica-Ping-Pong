@@ -23,3 +23,8 @@ canvas {
 .button button {
   cursor: pointer;
 }
+
+#canvas-container {
+  text-align: center;
+  display: none;
+}
